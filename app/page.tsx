@@ -470,44 +470,54 @@ export default function BrickBreaker() {
         <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} className="bg-zinc-950 w-full h-full object-contain" />
 
         {gameState === "MENU" && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-zinc-900/95 p-8 backdrop-blur-md">
-            <div className="mb-10 relative w-40 h-40 group">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-zinc-900/95 p-4 sm:p-8 backdrop-blur-md overflow-y-auto">
+            {/* Mascot Image - Responsive Size */}
+            <div className="mb-6 sm:mb-10 relative w-24 h-24 sm:w-40 sm:h-40 group shrink-0">
                <div className="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full"></div>
                <Image src="/Mascot.jpg" alt="Mascot" fill className="object-contain relative z-10" priority />
             </div>
-            <h1 className="text-7xl font-black text-white mb-2 tracking-widest retro-text drop-shadow-[0_4px_0_#1e40af]">INU 벽돌깨기</h1>
-            <p className="text-zinc-500 mb-10 font-bold tracking-widest retro-text text-lg">빨간 벽돌 3개를 먼저 깨보세요!</p>
-            <div className="w-full max-w-xs space-y-6">
+
+            {/* Title - Responsive Size */}
+            <h1 className="text-4xl sm:text-7xl font-black text-white mb-2 tracking-tighter sm:tracking-widest retro-text drop-shadow-[0_4px_0_#1e40af] text-center px-2">
+              INU 벽돌깨기
+            </h1>
+            <p className="text-zinc-500 mb-6 sm:mb-10 font-bold tracking-tight sm:tracking-widest retro-text text-sm sm:text-lg text-center px-4">
+              빨간 벽돌 3개를 먼저 깨보세요!
+            </p>
+
+            {/* Input & Button - Responsive Width */}
+            <div className="w-full max-w-[280px] sm:max-w-xs space-y-4 sm:space-y-6 shrink-0">
               <input
                 type="text"
                 placeholder="이름을 입력하세요"
                 value={playerName}
                 onKeyDown={(e) => e.key === 'Enter' && handleStartGame()}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full px-6 py-4 bg-zinc-950/50 border-2 border-zinc-800 rounded-xl focus:outline-none focus:border-blue-500 text-white"
+                className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-zinc-950/50 border-2 border-zinc-800 rounded-xl focus:outline-none focus:border-blue-500 text-white text-sm sm:text-base"
               />
-              <button onClick={handleStartGame} className="w-full game-btn btn-primary shadow-[0_4px_0_#1d4ed8] active:translate-y-1 active:shadow-none">
+              <button onClick={handleStartGame} className="w-full game-btn btn-primary shadow-[0_4px_0_#1d4ed8] active:translate-y-1 active:shadow-none py-3 sm:py-4 text-lg sm:text-xl">
                 <span>▶</span> 게임 시작
               </button>
             </div>
 
-            {/* Operation Instructions */}
-            <div className="mt-8 flex flex-col items-center gap-4 bg-zinc-950/40 px-6 py-4 rounded-2xl border border-zinc-800/50">
-              <h3 className="stat-label text-blue-400">HOW TO PLAY</h3>
-              <div className="flex gap-10">
+            {/* Operation Instructions - Responsive Layout */}
+            <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:gap-4 bg-zinc-950/40 px-4 py-3 sm:px-6 sm:py-4 rounded-2xl border border-zinc-800/50 w-full max-w-[280px] sm:max-w-xs shrink-0">
+              <h3 className="stat-label text-blue-400 text-[10px] sm:text-[12px]">HOW TO PLAY</h3>
+              <div className="flex justify-around w-full items-center">
                 <div className="flex flex-col items-center gap-1">
-                  <span className="text-zinc-500 text-[10px] font-bold">PC</span>
-                  <span className="text-white text-xs font-bold retro-text">← → 방향키</span>
+                  <span className="text-zinc-500 text-[8px] sm:text-[10px] font-bold uppercase tracking-tighter">PC</span>
+                  <span className="text-white text-[10px] sm:text-xs font-bold retro-text whitespace-nowrap">← → 방향키</span>
                 </div>
-                <div className="h-8 w-px bg-zinc-800"></div>
+                <div className="h-6 sm:h-8 w-px bg-zinc-800"></div>
                 <div className="flex flex-col items-center gap-1">
-                  <span className="text-zinc-500 text-[10px] font-bold">MOBILE</span>
-                  <span className="text-white text-xs font-bold retro-text">드래그 & 스와이프</span>
+                  <span className="text-zinc-500 text-[8px] sm:text-[10px] font-bold uppercase tracking-tighter">MOBILE</span>
+                  <span className="text-white text-[10px] sm:text-xs font-bold retro-text whitespace-nowrap">드래그 & 스와이프</span>
                 </div>
               </div>
             </div>
 
-            <footer className="mt-12 text-zinc-500 text-sm font-bold tracking-wider opacity-60">
+            {/* Footer - Responsive Margin */}
+            <footer className="mt-8 sm:mt-12 text-zinc-500 text-[10px] sm:text-sm font-bold tracking-wider opacity-60 text-center px-4">
               학과: 경영학부 | 학번: 202102958 | 이름: 정성원
             </footer>
           </div>
