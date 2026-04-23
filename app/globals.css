@@ -1,26 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-retro: 'VT323', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #121214;
+  --foreground: #ffffff;
+  --panel-bg: rgba(20, 20, 25, 0.9);
+  --panel-border: rgba(255, 255, 255, 0.05);
+  --primary: #3b82f6;
+  --retro-red: #ff8a80;
+  --retro-orange: #ffd180;
+  --retro-yellow: #ffff8d;
+  --retro-blue: #80d8ff;
+  --retro-green: #b9f6ca;
+  --retro-purple: #ea80fc;
+  --footer-text: #888;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+@layer base {
+  button {
+    cursor: pointer;
+  }
+}
+
+@utility retro-text {
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  position: relative;
+}
+
+/* CRT Scanline Effect */
+.glass-panel::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 100;
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.game-btn {
+  @apply px-8 py-4 rounded-xl font-bold transition-all active:scale-95 retro-text text-xl;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-900/20;
+}
+
+.btn-secondary {
+  @apply bg-zinc-800 text-zinc-300 hover:bg-zinc-700;
+}
+
+.stat-label {
+  @apply text-[12px] text-zinc-500 font-bold uppercase tracking-widest retro-text;
+}
+
+.stat-value {
+  @apply font-bold text-2xl text-white retro-text;
+}
+
+.footer-text {
+  color: var(--footer-text);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+input {
+  @apply retro-text text-xl bg-zinc-950/50 border-2 border-zinc-800 rounded-xl px-6 py-4 outline-none focus:border-blue-500 transition-all;
+}
+
+input::placeholder {
+  color: #888;
 }
