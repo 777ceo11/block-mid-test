@@ -111,21 +111,34 @@ export default function BrickBreaker() {
     }
   }, [gameState]);
 
-  // --- Confetti Effect ---
+  // --- Confetti Effect (Fireworks) ---
   const createConfetti = useCallback(() => {
     const colors = ["#ff8a80", "#ffd180", "#ffff8d", "#80d8ff", "#b9f6ca", "#ea80fc"];
-    for (let i = 0; i < 150; i++) {
-      particles.current.push({
-        x: CANVAS_WIDTH / 2,
-        y: CANVAS_HEIGHT / 2,
-        vx: (Math.random() - 0.5) * 12,
-        vy: (Math.random() - 0.6) * 15,
-        size: Math.random() * 8 + 4,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        life: 1.0,
-        decay: Math.random() * 0.015 + 0.005
-      });
-    }
+    
+    // Create multiple staggered explosions
+    const launchExplosion = (startX: number, startY: number) => {
+      for (let i = 0; i < 60; i++) {
+        particles.current.push({
+          x: startX,
+          y: startY,
+          vx: (Math.random() - 0.5) * 15,
+          vy: (Math.random() - 0.6) * 18,
+          size: Math.random() * 6 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 1.0,
+          decay: Math.random() * 0.02 + 0.01,
+          gravity: 0.25
+        });
+      }
+    };
+
+    // Center explosion
+    launchExplosion(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    
+    // Staggered side explosions
+    setTimeout(() => launchExplosion(CANVAS_WIDTH * 0.2, CANVAS_HEIGHT * 0.4), 300);
+    setTimeout(() => launchExplosion(CANVAS_WIDTH * 0.8, CANVAS_HEIGHT * 0.4), 600);
+    setTimeout(() => launchExplosion(CANVAS_WIDTH / 2, CANVAS_HEIGHT * 0.3), 900);
   }, []);
 
   // --- Initialization ---
@@ -283,7 +296,7 @@ export default function BrickBreaker() {
         ctx.closePath();
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.15;
+        p.vy += p.gravity || 0.15;
         p.life -= p.decay;
         if (p.life <= 0) particles.current.splice(i, 1);
       });
@@ -513,7 +526,7 @@ export default function BrickBreaker() {
         )}
 
         {(gameState === "GAMEOVER" || gameState === "SUCCESS") && (
-          <div className="absolute inset-0 z-[120] flex flex-col items-center justify-center bg-zinc-900/98 p-8 text-center">
+          <div className="absolute inset-0 z-[120] flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px] p-8 text-center">
             {gameState === "SUCCESS" ? (
               <>
                 <div className="text-7xl mb-4">🏆</div>
