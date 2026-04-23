@@ -434,37 +434,37 @@ export default function BrickBreaker() {
       
       {/* HUD */}
       {gameState !== "MENU" && (
-        <div className="w-[95%] max-w-[600px] mb-4 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 glass-panel">
-          <div className="flex gap-4 sm:gap-8 overflow-hidden">
-            <div className="flex flex-col">
-              <span className="stat-label text-[10px] sm:text-[12px]">Lives</span>
-              <div className="flex gap-0.5 sm:gap-1 mt-1">
+        <div className="w-[95%] max-w-[600px] mb-2 sm:mb-4 flex items-center justify-between px-3 py-2 sm:px-6 sm:py-4 glass-panel shrink-0">
+          <div className="flex gap-2 sm:gap-8 flex-1 justify-between sm:justify-start overflow-hidden mr-2">
+            <div className="flex flex-col items-start min-w-0">
+              <span className="stat-label text-[8px] sm:text-[12px]">Lives</span>
+              <div className="flex gap-0.5 mt-0.5">
                 {[...Array(3)].map((_, i) => (
-                  <span key={i} className={`text-sm sm:text-xl transition-all duration-300 ${i < lives ? "grayscale-0 scale-100" : "grayscale opacity-20 scale-90"}`}>❤️</span>
+                  <span key={i} className={`text-xs sm:text-xl transition-all duration-300 ${i < lives ? "grayscale-0 scale-100" : "grayscale opacity-20 scale-90"}`}>❤️</span>
                 ))}
               </div>
             </div>
-            <div className="flex flex-col">
-              <span className="stat-label text-[10px] sm:text-[12px]">Player</span>
-              <span className="stat-value text-sm sm:text-2xl truncate max-w-[60px] sm:max-w-none">{playerName}</span>
+            <div className="flex flex-col items-start min-w-0">
+              <span className="stat-label text-[8px] sm:text-[12px]">Player</span>
+              <span className="stat-value text-xs sm:text-2xl truncate w-full">{playerName}</span>
             </div>
-            <div className="flex flex-col">
-              <span className="stat-label text-[10px] sm:text-[12px]">Time</span>
-              <span className="stat-value text-sm sm:text-2xl text-red-500">{formatTime(time)}</span>
+            <div className="flex flex-col items-start min-w-0">
+              <span className="stat-label text-[8px] sm:text-[12px]">Time</span>
+              <span className="stat-value text-xs sm:text-2xl text-red-500">{formatTime(time)}</span>
             </div>
-            <div className="flex flex-col">
-              <span className="stat-label text-[10px] sm:text-[12px]">Target</span>
-              <div className="flex items-center gap-1 sm:gap-2">
-                 <span className="text-emerald-400 text-sm sm:text-xl">◎</span>
-                 <span className="stat-value text-sm sm:text-2xl">{targetRedBricks}/3</span>
+            <div className="flex flex-col items-start min-w-0">
+              <span className="stat-label text-[8px] sm:text-[12px]">Target</span>
+              <div className="flex items-center gap-0.5 sm:gap-2">
+                 <span className="text-emerald-400 text-[10px] sm:text-xl">◎</span>
+                 <span className="stat-value text-xs sm:text-2xl">{targetRedBricks}/3</span>
               </div>
             </div>
           </div>
-          <div className="flex gap-2 sm:gap-3 relative z-[110]">
-            <button onClick={handlePause} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs sm:text-base">
+          <div className="flex gap-1.5 sm:gap-3 relative z-[110] shrink-0">
+            <button onClick={handlePause} className="w-7 h-7 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[10px] sm:text-base">
               {gameState === "PAUSED" ? "▶️" : "⏸️"}
             </button>
-            <button onClick={handleExit} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg bg-red-900/20 text-red-500 hover:bg-red-900/40 text-sm sm:text-base">
+            <button onClick={handleExit} className="w-7 h-7 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg bg-red-900/20 text-red-500 hover:bg-red-900/40 text-[10px] sm:text-base">
               ✕
             </button>
           </div>
@@ -542,31 +542,32 @@ export default function BrickBreaker() {
         )}
 
         {(gameState === "GAMEOVER" || gameState === "SUCCESS") && (
-          <div className="absolute inset-0 z-[120] flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px] p-8 text-center">
+          <div className="absolute inset-0 z-[120] flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px] p-4 sm:p-8 text-center overflow-y-auto">
             {gameState === "SUCCESS" ? (
               <>
-                <div className="text-7xl mb-4">🏆</div>
-                <h2 className="text-5xl font-black text-emerald-400 mb-2 retro-text">MISSION COMPLETE!</h2>
-                <p className="text-zinc-400 mb-2 text-lg">{playerName}님, 미션을 성공했습니다!</p>
-                <p className="text-2xl font-mono text-white mb-6 retro-text">MY RECORD: {formatTime(time)}</p>
-                <div className="w-full max-w-sm bg-zinc-950/50 rounded-2xl border border-zinc-800 p-6 mb-8">
-                  <h3 className="stat-label mb-4 text-center text-blue-400">🏆 TOP 3 RANKINGS</h3>
+                <div className="text-5xl sm:text-7xl mb-2 sm:mb-4">🏆</div>
+                <h2 className="text-3xl sm:text-5xl font-black text-emerald-400 mb-1 sm:mb-2 retro-text">MISSION COMPLETE!</h2>
+                <p className="text-zinc-400 mb-1 sm:mb-2 text-xs sm:text-lg">{playerName}님, 미션을 성공했습니다!</p>
+                <p className="text-xl sm:text-2xl font-mono text-white mb-4 sm:mb-6 retro-text">MY RECORD: {formatTime(time)}</p>
+                
+                <div className="w-full max-w-sm bg-zinc-950/50 rounded-2xl border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+                  <h3 className="stat-label mb-3 sm:mb-4 text-center text-blue-400 text-[10px] sm:text-[12px]">🏆 TOP 3 RANKINGS</h3>
                   {isSaving ? (
-                    <div className="py-4 animate-pulse text-zinc-500 retro-text">SAVING RECORD...</div>
+                    <div className="py-2 sm:py-4 animate-pulse text-zinc-500 retro-text text-sm">SAVING RECORD...</div>
                   ) : (
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {rankings.length > 0 ? rankings.map((rank, i) => (
-                        <div key={i} className="flex justify-between items-center border-b border-zinc-800/50 pb-2 last:border-0">
-                          <div className="flex items-center gap-3">
-                            <span className={`w-6 h-6 flex items-center justify-center rounded-full text-[10px] font-bold ${i === 0 ? 'bg-yellow-500 text-black' : i === 1 ? 'bg-zinc-300 text-black' : 'bg-orange-600 text-white'}`}>
+                        <div key={i} className="flex justify-between items-center border-b border-zinc-800/50 pb-1.5 sm:pb-2 last:border-0">
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            <span className={`w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center rounded-full text-[8px] sm:text-[10px] font-bold ${i === 0 ? 'bg-yellow-500 text-black' : i === 1 ? 'bg-zinc-300 text-black' : 'bg-orange-600 text-white'}`}>
                               {i + 1}
                             </span>
-                            <span className="text-white font-bold retro-text">{rank.name}</span>
+                            <span className="text-white font-bold retro-text text-xs sm:text-base">{rank.name}</span>
                           </div>
-                          <span className="text-blue-400 font-mono font-bold retro-text">{rank.finishtime}</span>
+                          <span className="text-blue-400 font-mono font-bold retro-text text-xs sm:text-base">{rank.finishtime}</span>
                         </div>
                       )) : (
-                        <p className="text-zinc-600 italic py-2">No records yet</p>
+                        <p className="text-zinc-600 italic py-1 sm:py-2 text-[10px]">No records yet</p>
                       )}
                     </div>
                   )}
@@ -574,12 +575,12 @@ export default function BrickBreaker() {
               </>
             ) : (
               <>
-                <div className="text-8xl mb-6">💀</div>
-                <h2 className="text-6xl font-black text-red-500 mb-4 retro-text">MISSION FAILED</h2>
-                <p className="text-zinc-400 mb-10 text-xl">미션 실패! 다시 도전하시겠습니까?</p>
+                <div className="text-6xl sm:text-8xl mb-4 sm:mb-6">💀</div>
+                <h2 className="text-4xl sm:text-6xl font-black text-red-500 mb-2 sm:mb-4 retro-text">MISSION FAILED</h2>
+                <p className="text-zinc-400 mb-8 sm:mb-10 text-sm sm:text-xl">미션 실패! 다시 도전하시겠습니까?</p>
               </>
             )}
-            <button onClick={handleExit} className="game-btn btn-primary shadow-[0_4px_0_#1d4ed8]">다시 시작</button>
+            <button onClick={handleExit} className="game-btn btn-primary shadow-[0_4px_0_#1d4ed8] py-3 sm:py-4 px-6 sm:px-8 text-base sm:text-xl">다시 시작</button>
           </div>
         )}
       </div>
