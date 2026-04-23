@@ -338,6 +338,11 @@ export default function BrickBreaker() {
       if (e.key === "ArrowLeft") leftPressed.current = false;
     };
     const handleTouch = (e: TouchEvent) => {
+      // Don't intercept touches on buttons
+      if ((e.target as HTMLElement).closest("button")) {
+        return;
+      }
+
       const canvas = canvasRef.current;
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
