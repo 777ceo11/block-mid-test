@@ -415,6 +415,7 @@ export default function BrickBreaker() {
   }, [gameState, countdown]);
 
   const handleExit = () => {
+    setPlayerName("");
     setGameState("MENU");
   };
 
